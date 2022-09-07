@@ -1,0 +1,43 @@
+<div class="container-overview">
+
+  <div class="container-body">
+
+    <div class="container-table">
+      <table class="table" *ngIf="todos.length">
+        <tbody>
+          <tr *ngFor="let todo of todos">
+            <td class="status">
+              <span>
+                <input type="checkbox" [checked]="todo.completed" (change)="todo.completed = !todo.completed">
+              </span>
+            </td>
+            <td class="description">
+              <input type="text" readonly value="{{todo.title}}"></td>
+            <td class="edit"><mat-icon fontIcon="home"></mat-icon></td>
+            <td class="delete"><button ng-click="enableDelete()">Löschen</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div> <!-- end of container-table -->
+
+
+    <div class="container-newEntries">
+
+      <div class="add-new-entry">
+
+          <h2>Neues ToDo anlegen</h2>
+          <div class="newTodo">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+              <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+            </div>
+          </div>
+
+      </div> <!-- end of add-new-entry -->
+
+    </div> <!-- end of container-newEntries -->
+
+  </div> <!-- end of container-body -->
+
+</div> <!-- end of container-overview -->

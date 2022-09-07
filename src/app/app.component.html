@@ -1,0 +1,18 @@
+<div>
+  <div class="container-header">
+    <div class="container-logo">
+      <img class="logo" src="./assets/images/Logo.png">
+    </div>
+    <div class="LoggedIn-user">
+      <h1>{{logInUser}}'s ToDo Liste</h1>
+    </div>
+    <div calss="user-information" style="font-size: 20px; font-weight: bold">
+      <!--<a [routerLink]="[]"> Benutzerdaten</a>-->
+      <button mat-raised-button color="primary">Primary</button>
+      <a> Benutzerdaten</a><!--ToDo: LogIn User setzten-->
+    </div>
+  </div>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+</div>
