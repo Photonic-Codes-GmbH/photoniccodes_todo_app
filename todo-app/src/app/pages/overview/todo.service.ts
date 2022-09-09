@@ -14,14 +14,14 @@ export class TodoService {
 
   getAllUsers() {
     return this.http.get<User[]>(this.userUrl).pipe(
-      tap(data=> console.log('All', JSON.stringify(data))),
+      tap(/*data=> console.log('All', JSON.stringify(data))*/),
       catchError(this.handleError)
     );
   }
 
   getAllTodos(){
     return this.http.get<Todo[]>(this.todosUrl).pipe(
-      tap(data=> console.log('All', JSON.stringify(data))),
+      tap(/*data=> console.log('All', JSON.stringify(data))*/),
       catchError(this.handleError)
     );
   }

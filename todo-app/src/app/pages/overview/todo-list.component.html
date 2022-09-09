@@ -5,16 +5,20 @@
     <div class="container-table">
       <table class="table" *ngIf="todos.length">
         <tbody>
-          <tr *ngFor="let todo of todos">
+          <tr *ngFor="let todo of todos;">
             <td class="status">
               <span>
                 <input type="checkbox" [checked]="todo.completed" (change)="todo.completed = !todo.completed">
               </span>
             </td>
-            <td class="description">
-              <input type="text" readonly value="{{todo.title}}" style="border: none;"></td>
-            <td class="edit"><mat-icon fontIcon="edit"></mat-icon></td>
-            <td class="delete"><mat-icon fontIcon="delete"></mat-icon></td>
+            <td class="description" style=" width: 100%;">
+              <input type="text" readonly value="{{todo.title}}, ID => {{todo.id}}, UserID => {{todo.userId}}"></td>
+            <td class="edit">
+              <div>
+                <mat-icon fontIcon="edit" (click)="edit(todo.id)"></mat-icon>
+              </div>
+            </td>
+            <td class="delete"><mat-icon fontIcon="delete" (click)="delete(todo.id)"></mat-icon></td>
           </tr>
         </tbody>
       </table>
@@ -29,8 +33,18 @@
           <h2>Neues ToDo anlegen</h2>
           <div class="newTodo">
             <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
-              <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+              <form (submit)="addTodo()">
+                <input
+                    type="text"
+                    name="inputTodo"
+                    class="todo-input"
+                    placeholder="Neues ToDo"
+                    [(ngModel)]="inputTodo"
+                    aria-label="Recipient's username"
+                    aria-describedby="button-addon2"
+                  />
+                <input type="submit" value="Hinzufügen" class="btn btn-outline-secondary" id="button-addon2"/>
+              </form>
             </div>
           </div>
 

@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
+import { identifierName } from "@angular/compiler";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { TodoService } from "./todo.service";
 
 @Component({
@@ -21,16 +22,31 @@ export class TodoListComponent implements OnInit {
   users: User[] = [];
   todos: Todo[] = [];
 
+  inputTodo: string = "";
+
   pageTitle: string = 'Todo List';
   newTodo: string | undefined;
 
 
 
-  enableEditor(): void {
-
-
+  edit(todoId:number) {
+    console.log(todoId);
   }
 
+  delete(todoId: number) {
+    this.todos = this.todos.filter((todo) => todo.id !== todoId);
+    console.log(this.todos);
+  }
+
+  addTodo() {
+    this.todos.push({
+      userId: 1, // TODO: Set the userId to loggedIn Id!!!
+      id: this.todos.length+1, // TODO: Set the ID to last of array
+      title: this.inputTodo,
+      completed: true
+    })
+    this.inputTodo = "";
+  }
 }
 
 
