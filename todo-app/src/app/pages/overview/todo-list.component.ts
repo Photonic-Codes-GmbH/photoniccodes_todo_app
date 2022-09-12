@@ -13,43 +13,34 @@ import { TodoService } from "./todo.service";
 export class TodoListComponent implements OnInit {
 
   ngOnInit(): void {
-
-    //this.todoService.getAllUsers().subscribe((incomingUsers: User[]) => this.users = incomingUsers);
     this.todoService.getAllTodos().subscribe((incommingTodos: Todo[]) => this.todos = incommingTodos);
   }
 
   constructor(private todoService: TodoService) { }
 
-  users: User[] = [];
   todos: Todo[] = [];
-  changes: string = "";
 
   inputTodo: string = ""; //ngModel
-  changedTodo: any;
+  isEdit: boolean = true; // diable/enable "readonly" property
 
 
-  pageTitle: string = 'Todo List';
-  newTodo: string | undefined;
-  isEdit: boolean = true;
-
-
-  edit(todoID: number) {
+  edit(todoId: number) {
     if(this.isEdit == true){
       this.isEdit = false;
     }else{
       this.isEdit = true;
-      this.changedEdit(todoID);
+      this.changes(todoId);
     }
   }
 
-  changedEdit(todoID: number) {
-    this.todoService.patchTodo(todoID, { title: this.todos.filter(todo => todo.id === todoID)[0].title });
-    console.log({ title: this.todos.filter(todo => todo.id === todoID)[0].title });
+  changes(todoId: number) {
+    this.todoService.patchTodo(todoId, { title: this.todos.filter(todo => todo.id === todoId)[0].title });
+    console.log({ title: this.todos.filter(todo => todo.id === todoId)[0].title });
   }
 
   delete(todoId: number) {
-    this.todos = this.todos.filter((todo) => todo.id !== todoId);
-    console.log(this.todos);
+    this.todoService.deleteTodo(todoId);
+    console.log("Deleted TodoId -> " + todoId);
   }
 
   addTodo() {

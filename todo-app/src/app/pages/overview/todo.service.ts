@@ -28,7 +28,11 @@ export class TodoService {
   }
 
   patchTodo(id: number, data: any) {
-    return this.http.patch(this.todosUrl + id, data)
+    return this.http.patch(this.todosUrl + id, data);
+  }
+
+  deleteTodo(id: number){
+    return this.http.delete(this.todosUrl + id);
   }
 
   private handleError(err: HttpErrorResponse) {
