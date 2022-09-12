@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable, OnInit } from "@angular/core";
 import { Observable, catchError, tap, throwError } from "rxjs";
-import { User, Todo } from "./todo-list.component";
+import { User, Todo } from "../interfaces/todo";
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +9,7 @@ import { User, Todo } from "./todo-list.component";
 export class TodoService {
   private userUrl = "https://jsonplaceholder.typicode.com/users";
   private todosUrl = "https://jsonplaceholder.typicode.com/todos";
+  private patchTodosUrl = "https://jsonplaceholder.typicode.com/todos/";
 
   constructor(private http: HttpClient) {}
 

@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { identifierName } from "@angular/compiler";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { User, Todo } from "../interfaces/todo";
 import { TodoService } from "./todo.service";
 
 @Component({
@@ -21,16 +22,21 @@ export class TodoListComponent implements OnInit {
 
   users: User[] = [];
   todos: Todo[] = [];
+  editTodos: Todo[] = [];
 
   inputTodo: string = "";
 
   pageTitle: string = 'Todo List';
   newTodo: string | undefined;
-
+  isEdit: boolean = true;
 
 
   edit(todoId:number) {
-    console.log(todoId);
+    if(this.isEdit == true){
+      this.isEdit = false;
+    }else{
+      this.isEdit = true;
+    }
   }
 
   delete(todoId: number) {
@@ -41,50 +47,10 @@ export class TodoListComponent implements OnInit {
   addTodo() {
     this.todos.push({
       userId: 1, // TODO: Set the userId to loggedIn Id!!!
-      id: this.todos.length+1, // TODO: Set the ID to last of array
+      id: this.todos.length+1, // Set the ID to last of array
       title: this.inputTodo,
       completed: true
     })
     this.inputTodo = "";
   }
-}
-
-
-//TODO: Interface auslagern in extra Datei
-// #Interface
-export interface Geo {
-  lat: string;
-  lng: string;
-}
-
-export interface Address {
-  street: string;
-  suite: string;
-  city: string;
-  zipcode: string;
-  geo: Geo;
-}
-
-export interface Company {
-  name: string;
-  catchPhrase: string;
-  bs: string;
-}
-
-export interface User {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-  address: Address;
-  phone: string;
-  website: string;
-  company: Company;
-}
-
-export interface Todo {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
 }

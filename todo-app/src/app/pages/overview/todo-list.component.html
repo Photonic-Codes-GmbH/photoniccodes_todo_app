@@ -12,7 +12,7 @@
               </span>
             </td>
             <td class="description" style=" width: 100%;">
-              <input type="text" readonly value="{{todo.title}}, ID => {{todo.id}}, UserID => {{todo.userId}}"></td>
+              <input type="text" [readonly]="isEdit" value="{{todo.title}}, ID => {{todo.id}}, UserID => {{todo.userId}}"></td>
             <td class="edit">
               <div>
                 <mat-icon fontIcon="edit" (click)="edit(todo.id)"></mat-icon>
@@ -34,16 +34,18 @@
           <div class="newTodo">
             <div class="input-group mb-3">
               <form (submit)="addTodo()">
+                <div>
                 <input
                     type="text"
                     name="inputTodo"
                     class="todo-input"
                     placeholder="Neues ToDo"
                     [(ngModel)]="inputTodo"
-                    aria-label="Recipient's username"
-                    aria-describedby="button-addon2"
                   />
-                <input type="submit" value="Hinzufügen" class="btn btn-outline-secondary" id="button-addon2"/>
+                </div>
+                <div>
+                <input type="submit" value="Hinzufügen" class="btn btn-outline-secondary"/>
+                </div>
               </form>
             </div>
           </div>
