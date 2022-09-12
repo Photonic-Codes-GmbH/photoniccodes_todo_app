@@ -22,21 +22,29 @@ export class TodoListComponent implements OnInit {
 
   users: User[] = [];
   todos: Todo[] = [];
-  editTodos: Todo[] = [];
+  changes: string = "";
 
-  inputTodo: string = "";
+  inputTodo: string = ""; //ngModel
+  changedTodo: any;
+
 
   pageTitle: string = 'Todo List';
   newTodo: string | undefined;
   isEdit: boolean = true;
 
 
-  edit(todoId:number) {
+  edit(todoID: number) {
     if(this.isEdit == true){
       this.isEdit = false;
     }else{
       this.isEdit = true;
+      this.changedEdit(todoID);
     }
+  }
+
+  changedEdit(todoID: number) {
+    this.todoService.patchTodo(todoID, { title: this.todos.filter(todo => todo.id === todoID)[0].title });
+    console.log({ title: this.todos.filter(todo => todo.id === todoID)[0].title });
   }
 
   delete(todoId: number) {
@@ -52,5 +60,9 @@ export class TodoListComponent implements OnInit {
       completed: true
     })
     this.inputTodo = "";
+  }
+
+  trackByIdx(index: number, obj: any): any {
+    return index;
   }
 }

@@ -5,19 +5,25 @@
     <div class="container-table">
       <table class="table" *ngIf="todos.length">
         <tbody>
-          <tr *ngFor="let todo of todos;">
+          <tr *ngFor="let todo of todos; let i = index;trackBy:trackByIdx">
             <td class="status">
               <span>
                 <input type="checkbox" [checked]="todo.completed" (change)="todo.completed = !todo.completed">
               </span>
             </td>
-            <td class="description" style=" width: 100%;">
-              <input type="text" [readonly]="isEdit" value="{{todo.title}}, ID => {{todo.id}}, UserID => {{todo.userId}}"></td>
-            <td class="edit">
-              <div>
-                <mat-icon fontIcon="edit" (click)="edit(todo.id)"></mat-icon>
-              </div>
-            </td>
+              <td class="description" style=" width: 100%;">
+                <input
+                  class="edited"
+                  type="text"
+                  [readonly]="isEdit"
+                  [(ngModel)]="todos[i].title"
+                  />
+              </td>
+              <td class="edit">
+                <div>
+                  <mat-icon fontIcon="edit" (click)="edit(todo.id)"></mat-icon>
+                </div>
+              </td>
             <td class="delete"><mat-icon fontIcon="delete" (click)="delete(todo.id)"></mat-icon></td>
           </tr>
         </tbody>

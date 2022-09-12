@@ -3,13 +3,13 @@ import { Injectable, OnInit } from "@angular/core";
 import { Observable, catchError, tap, throwError } from "rxjs";
 import { User, Todo } from "../interfaces/todo";
 
+
 @Injectable({
   providedIn: 'root',
 })
 export class TodoService {
   private userUrl = "https://jsonplaceholder.typicode.com/users";
   private todosUrl = "https://jsonplaceholder.typicode.com/todos";
-  private patchTodosUrl = "https://jsonplaceholder.typicode.com/todos/";
 
   constructor(private http: HttpClient) {}
 
@@ -22,9 +22,13 @@ export class TodoService {
 
   getAllTodos(){
     return this.http.get<Todo[]>(this.todosUrl).pipe(
-      tap(/*data=> console.log('All', JSON.stringify(data))*/),
+      tap(data=> console.log('All', JSON.stringify(data))),
       catchError(this.handleError)
     );
+  }
+
+  patchTodo(id: number, data: any) {
+    return this.http.patch(this.todosUrl + id, data)
   }
 
   private handleError(err: HttpErrorResponse) {
