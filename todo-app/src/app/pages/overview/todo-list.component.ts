@@ -12,7 +12,8 @@ import { TodoService } from "./todo.service";
 
 export class TodoListComponent implements OnInit {
 
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
     this.todoService.getAllTodos().subscribe((incommingTodos: Todo[]) => this.todos = incommingTodos);
   }
 
@@ -22,6 +23,7 @@ export class TodoListComponent implements OnInit {
 
   inputTodo: string = ""; //ngModel
   isEdit: boolean = true; // diable/enable "readonly" property
+  isChanged: boolean = false; //
 
 
   edit(todoId: number) {
@@ -29,28 +31,50 @@ export class TodoListComponent implements OnInit {
       this.isEdit = false;
     }else{
       this.isEdit = true;
+      this.isChanged = true;
       this.changes(todoId);
     }
   }
 
   changes(todoId: number) {
-    this.todoService.patchTodo(todoId, { title: this.todos.filter(todo => todo.id === todoId)[0].title });
-    console.log({ title: this.todos.filter(todo => todo.id === todoId)[0].title });
+    if(this.isChanged == true){ //changes via edit
+      this.todoService.patchTodo(todoId, { title: this.todos.filter(todo => todo.id === todoId)[0].title });
+      this.isChanged = false;
+      console.log({ title: this.todos.filter(todo => todo.id === todoId)[0].title }); //TODO: delete me
+    }
+    else if(this.isChanged == false){ // changes via checkbox
+      if(this.todos.filter(todo => todo.id === todoId)[0].completed == true){
+        this.todoService.patchTodo(todoId, { completed: false });
+      }
+      else{
+        this.todoService.patchTodo(todoId, { completed: true });
+      }
+    }
   }
 
   delete(todoId: number) {
     this.todoService.deleteTodo(todoId);
+    this.todos = this.todos.filter((todo) => todo.id !== todoId);
     console.log("Deleted TodoId -> " + todoId);
   }
 
   addTodo() {
-    this.todos.push({
-      userId: 1, // TODO: Set the userId to loggedIn Id!!!
-      id: this.todos.length+1, // Set the ID to last of array
+      this.todos.push({
+      userId: 1, // FIXME: Set the userId to loggedIn userId!!!
+      id: this.todos.length + 1,
       title: this.inputTodo,
-      completed: true
-    })
+      completed: false
+    });
+    this.post(this.todos.length);
     this.inputTodo = "";
+  }
+
+  post(todoId: number){
+    this.todoService.postTodo(todoId,
+    { userId: 1, //FIXME: Set the userId to loggedIn userId!!!
+      id: todoId,
+      title: this.inputTodo,
+      completed: false});
   }
 
   trackByIdx(index: number, obj: any): any {

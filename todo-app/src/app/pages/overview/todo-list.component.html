@@ -8,7 +8,7 @@
           <tr *ngFor="let todo of todos; let i = index;trackBy:trackByIdx">
             <td class="status">
               <span>
-                <input type="checkbox" [checked]="todo.completed" (change)="todo.completed = !todo.completed">
+                <input type="checkbox" (click)="changes(todo.id)" [checked]="todo.completed" (change)="todo.completed = !todo.completed">
               </span>
             </td>
               <td class="description" style=" width: 100%;">
@@ -38,26 +38,28 @@
 
       <div class="add-new-entry">
 
-          <h2>Neues ToDo anlegen</h2>
-          <div class="newTodo">
-            <div class="input-group mb-3">
-              <form (submit)="addTodo()">
-                <div>
-                <input
-                    type="text"
-                    name="inputTodo"
-                    class="todo-input"
-                    placeholder="Neues ToDo"
-                    [(ngModel)]="inputTodo"
-                  />
-                </div>
-                <div>
-                <input type="submit" value="Hinzufügen" class="btn btn-outline-secondary"/>
-                </div>
-              </form>
-            </div>
-          </div>
+          <h2><b>Neues ToDo anlegen</b></h2>
+          <form (submit)="addTodo()">
+            <div class="newTodo">
 
+                <div class="fields-container">
+                  <mat-form-field>
+                    <input
+                        matInput
+                        type="text"
+                        name="inputTodo"
+                        class="todo-input"
+                        placeholder="ToDo Name"
+                        [(ngModel)]="inputTodo"
+                      />
+                  </mat-form-field>
+                </div>
+                <div>
+                <input type="submit" value="Anlegen" class="btn btn-outline-secondary"/>
+                </div>
+
+            </div>
+          </form>
       </div> <!-- end of add-new-entry -->
 
     </div> <!-- end of container-newEntries -->

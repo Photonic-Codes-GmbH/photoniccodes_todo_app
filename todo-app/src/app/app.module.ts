@@ -9,6 +9,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { UserDetailComponent } from './pages/userdata/user-detail.component';
 import { MaterialModule } from 'material-module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input';
+
 
 
 @NgModule({
@@ -26,6 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     HttpClientModule,
     MaterialModule,
+    MatInputModule,
     BrowserAnimationsModule,
   ],
   providers: [],
