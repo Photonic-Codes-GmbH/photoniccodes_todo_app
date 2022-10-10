@@ -1,69 +1,86 @@
+<div class="container-header">
+  <div class="container-logo">
+    <img class="logo" src="./assets/images/Logo.png" />
+  </div>
+  <div class="LoggedIn-user">
+    <h1>{{loginUser}}'s ToDo Liste</h1>
+  </div>
+  <div calss="user-information" style="font-size: 20px; font-weight: bold">
+    <!--<a [routerLink]="[]"> Benutzerdaten</a>-->
+    <a routerLink="/userdata" style="text-decoration: inherit; color: inherit;">Benutzerdaten</a
+    ><!--ToDo: LogIn User setzten-->
+  </div>
+</div>
+
 <div class="container-overview">
-
   <div class="container-body">
-
     <div class="container-table">
       <table class="table" *ngIf="todos.length">
         <tbody>
-          <tr *ngFor="let todo of todos; let i = index;trackBy:trackByIdx">
+          <tr *ngFor="let todo of todos; let i = index; trackBy: trackByIdx">
             <td class="status">
               <span>
-                <input type="checkbox" (click)="changes(todo.id)" [checked]="todo.completed" (change)="todo.completed = !todo.completed">
+                <input
+                  type="checkbox"
+                  (click)="changes(todo.id)"
+                  [checked]="todo.completed"
+                  (change)="todo.completed = !todo.completed"
+                />
               </span>
             </td>
-              <td class="description" style=" width: 100%;">
-                <input
-                  class="edited"
-                  type="text"
-                  [readonly]="isEdit"
-                  [(ngModel)]="todos[i].title"
-                  />
-              </td>
-              <td class="edit">
-                <div>
-                  <mat-icon fontIcon="edit" (click)="edit(todo.id)"></mat-icon>
-                </div>
-              </td>
+            <td class="description" style="width: 100%">
+              <input
+                class="edited"
+                type="text"
+                [readonly]="isEdit"
+                [(ngModel)]="todos[i].title"
+              />
+            </td>
+            <td class="edit">
+              <div>
+                <mat-icon fontIcon="edit" (click)="edit(todo.id)"></mat-icon>
+              </div>
+            </td>
             <td class="delete">
               <mat-icon fontIcon="delete" (click)="delete(todo.id)"></mat-icon>
             </td>
           </tr>
         </tbody>
       </table>
-
-    </div> <!-- end of container-table -->
-
+    </div>
+    <!-- end of container-table -->
 
     <div class="container-newEntries">
-
       <div class="add-new-entry">
-
-          <h2><b>Neues ToDo anlegen</b></h2>
-          <form (submit)="addTodo()">
-            <div class="newTodo">
-
-                <div class="fields-container">
-                  <mat-form-field>
-                    <input
-                        matInput
-                        type="text"
-                        name="inputTodo"
-                        class="todo-input"
-                        placeholder="ToDo Name"
-                        [(ngModel)]="inputTodo"
-                      />
-                  </mat-form-field>
-                </div>
-                <div>
-                <input type="submit" value="Anlegen" class="btn btn-outline-secondary"/>
-                </div>
-
+        <h2><b>Neues ToDo anlegen</b></h2>
+        <form (submit)="addTodo()">
+          <div class="newTodo">
+            <div class="fields-container">
+              <mat-form-field>
+                <input
+                  matInput
+                  type="text"
+                  name="inputTodo"
+                  class="todo-input"
+                  placeholder="ToDo Name"
+                  [(ngModel)]="inputTodo"
+                />
+              </mat-form-field>
             </div>
-          </form>
-      </div> <!-- end of add-new-entry -->
-
-    </div> <!-- end of container-newEntries -->
-
-  </div> <!-- end of container-body -->
-
-</div> <!-- end of container-overview -->
+            <div>
+              <input
+                type="submit"
+                value="Anlegen"
+                class="btn btn-outline-secondary"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- end of add-new-entry -->
+    </div>
+    <!-- end of container-newEntries -->
+  </div>
+  <!-- end of container-body -->
+</div>
+<!-- end of container-overview -->

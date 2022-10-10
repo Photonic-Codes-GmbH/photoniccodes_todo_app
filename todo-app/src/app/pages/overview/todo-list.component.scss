@@ -1,3 +1,10 @@
+.container-header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
 .container-overview {
   display: flex;
   flex-direction: column;

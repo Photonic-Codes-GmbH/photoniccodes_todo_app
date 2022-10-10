@@ -1,11 +1,11 @@
-import { HttpClient } from "@angular/common/http";
-import { identifierName } from "@angular/compiler";
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { User, Todo } from "../interfaces/todo";
+import { LoginService } from './../login/login.service';
+import { Component, OnInit } from "@angular/core";
+import { Todo } from "../interfaces/todo";
 import { TodoService } from "./todo.service";
+import { __importDefault } from 'tslib';
+
 
 @Component({
-  selector: 'list-overview',
   templateUrl: './todo-list.component.html',
   styleUrls:['./todo-list.component.scss']
 })
@@ -17,9 +17,13 @@ export class TodoListComponent implements OnInit {
     this.todoService.getAllTodos().subscribe((incommingTodos: Todo[]) => this.todos = incommingTodos);
   }
 
-  constructor(private todoService: TodoService) { }
+  constructor(private todoService: TodoService, private loginService: LoginService) { }
 
   todos: Todo[] = [];
+  // todos = this.abc.filter(todo => todo.userId === this.loginService.currentUser.id);
+
+  loginUser = this.loginService.currentUser.name;
+
 
   inputTodo: string = ""; //ngModel
   isEdit: boolean = true; // diable/enable "readonly" property
@@ -27,6 +31,9 @@ export class TodoListComponent implements OnInit {
 
 
   edit(todoId: number) {
+    console.log("Filterd ToDos" + this.todos);
+    console.log("LoginService: ID " + this.loginService.currentUser.id);
+
     if(this.isEdit == true){
       this.isEdit = false;
     }else{
@@ -60,7 +67,7 @@ export class TodoListComponent implements OnInit {
 
   addTodo() {
       this.todos.push({
-      userId: 1, // FIXME: Set the userId to loggedIn userId!!!
+      userId: this.loginService.currentUser.id,
       id: this.todos.length + 1,
       title: this.inputTodo,
       completed: false
@@ -71,7 +78,7 @@ export class TodoListComponent implements OnInit {
 
   post(todoId: number){
     this.todoService.postTodo(todoId,
-    { userId: 1, //FIXME: Set the userId to loggedIn userId!!!
+    { userId: this.loginService.currentUser.id,
       id: todoId,
       title: this.inputTodo,
       completed: false});

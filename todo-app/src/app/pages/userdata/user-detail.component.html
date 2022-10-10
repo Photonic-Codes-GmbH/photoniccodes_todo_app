@@ -8,19 +8,24 @@
   </div>
 
   <div class="container-body">
-    <div>
+    <div class="userStuff">
       <div class="container-input">
         <div class="username">
-          <input type="text" placeholder="Benutzername">
+          <input type="text" placeholder="{{userName}}">
         </div>
         <div class="email">
-          <input type="email" placeholder="E-Mail Address">
+          <input type="email" placeholder="{{email}}">
         </div>
       </div>
       <div class="container-value">
-        <input type="text" value="2 hardcoded" readonly>
+        <input type="text" value="{{userID}}" readonly>
       </div>
-    </div>
+    </div> <!-- end of userStuff-->
+    <div class="container-userPicture">
+      <div class="userPicture">
+        <input type="image" src="{{profileImage}}"/>
+      </div>
+    </div> <!-- end of userPicture-->
 
   </div> <!-- end of container-body -->
 </div>
