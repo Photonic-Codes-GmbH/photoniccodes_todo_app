@@ -14,7 +14,7 @@ export class LoginService {
 
   getAllUsers() {
     return this.http.get<User[]>(this.userUrl).pipe(
-      tap(data=> console.log('All', JSON.stringify(data))),
+      tap(data=> data),
       catchError(this.handleError)
     );
   }
