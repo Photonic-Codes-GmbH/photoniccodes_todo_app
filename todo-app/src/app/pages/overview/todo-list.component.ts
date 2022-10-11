@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Todo } from '../interfaces/todo';
 import { TodoService } from './todo.service';
 import { __importDefault } from 'tslib';
+import { Router } from '@angular/router';
+
 
 @Component({
   templateUrl: './todo-list.component.html',
@@ -10,6 +12,9 @@ import { __importDefault } from 'tslib';
 })
 export class TodoListComponent implements OnInit {
   ngOnInit(): void {
+
+    if(!this.loginService.currentUser) this.router.navigate(['/login' ])
+
     this.todoService
       .getAllTodos()
       .subscribe((incommingTodos: Todo[]) => (this.todos = incommingTodos));
@@ -17,12 +22,13 @@ export class TodoListComponent implements OnInit {
 
   constructor(
     private todoService: TodoService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private router: Router
   ) {}
 
   todos: Todo[] = [];
 
-  loginUser = this.loginService.currentUser.name;
+  loginUser = this.loginService.currentUser?.name;
 
   inputTodo: string = ''; //ngModel
   isEdit: boolean = true; // diable/enable "readonly" property

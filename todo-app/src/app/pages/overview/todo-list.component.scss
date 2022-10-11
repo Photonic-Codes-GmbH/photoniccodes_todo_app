@@ -11,6 +11,11 @@
   align-items: center;
 }
 
+mat-icon {
+
+  cursor: pointer;
+}
+
 .container-body {
   display: flex;
   flex-direction: column;

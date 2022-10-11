@@ -24,6 +24,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   pics: Picture[] = [];
+  loginUser = this.loginService.currentUser.name;
 
   userID = this.loginService.currentUser.id;
   userName = this.loginService.currentUser.username;
