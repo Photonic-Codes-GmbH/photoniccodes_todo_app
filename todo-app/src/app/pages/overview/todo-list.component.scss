@@ -1,4 +1,4 @@
-.container-header{
+.container-header {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -12,8 +12,15 @@
 }
 
 mat-icon {
-
   cursor: pointer;
+}
+
+.user-information {
+  width: 50px;
+}
+
+.profil {
+  transform: scale(2);
 }
 
 .container-body {
@@ -29,7 +36,7 @@ mat-icon {
   padding-right: 10px;
   margin-bottom: 20px;
 
-  .edited{
+  .edited {
     width: 100%;
     border: none;
   }
@@ -48,7 +55,3 @@ mat-icon {
   justify-content: space-between;
   width: 500px;
 }
-
-
-
-

@@ -3,12 +3,12 @@
     <img class="logo" src="./assets/images/Logo.png" />
   </div>
   <div class="LoggedIn-user">
-    <h1>{{loginUser}}'s ToDo Liste</h1>
+    <h1>{{ loginUser }}'s ToDo Liste</h1>
   </div>
-  <div calss="user-information" style="font-size: 20px">
+  <div calss="user-information">
     <!--<a [routerLink]="[]"> Benutzerdaten</a>-->
-    <a routerLink="/userdata" style="text-decoration: inherit; color: inherit;">Benutzerdaten</a
-    ><!--ToDo: LogIn User setzten-->
+    <mat-icon class="profil" fontIcon="account_circle" routerLink="/userdata"></mat-icon>
+    <!--ToDo: LogIn User setzten-->
   </div>
 </div>
 
