@@ -26,8 +26,39 @@ export class UserDetailComponent implements OnInit {
   pics: Picture[] = [];
   loginUser = this.loginService.currentUser.name;
 
-  userID = this.loginService.currentUser.id;
-  userName = this.loginService.currentUser.username;
-  email = this.loginService.currentUser.email;
+  loggenInUserID = this.loginService.currentUser.id;
+  loggedInUserName = this.loginService.currentUser.username;
+  loggedInEmail = this.loginService.currentUser.email;
   profileImage = ''; //this.pics[0].thumbnailUrl;
+
+  changeUsername = ""; //ngModel
+  changeEmail = ""; //ngModel
+
+  changes() {
+    if (this.changeUsername) { //Wenn in der Eingabe der Username geändert wurde
+      if(this.changeEmail) { //Wenn die E-Mail u. Username geändert wurde
+      this.userDetailService.patchUser(this.loginService.currentUser.id, {
+        username: this.changeUsername,
+        email: this.changeEmail
+      });
+      console.log("Username und Email wurden geändert zu: " + this.changeUsername + " und " + this.changeEmail);
+      this.changeUsername = "";
+      this.changeEmail = "";
+      }
+      else { //Nur der Benutzernamen geändert
+        this.userDetailService.patchUser(this.loginService.currentUser.id, {
+          username: this.changeUsername
+        });
+        console.log("Username wurde geändert zu: " + this.changeUsername);
+        this.changeUsername = "";
+      }
+    }
+    else{ //Nur die E-Mail geändert
+      this.userDetailService.patchUser(this.loginService.currentUser.id, {
+        email: this.changeEmail
+      });
+      console.log("Email wurde geändert zu: " + this.changeEmail);
+      this.changeEmail = "";
+    }
+  }
 }

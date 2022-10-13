@@ -9,17 +9,22 @@ import { Picture } from "../interfaces/pictures";
   providedIn: 'root',
 })
 export class UserDetailService {
-  private todosUrl = "https://jsonplaceholder.typicode.com/photos";
+  private photoUrl = "https://jsonplaceholder.typicode.com/photos";
+  private userUrl = "https://jsonplaceholder.typicode.com/users";
 
   constructor(private http: HttpClient, private loginService: LoginService) {}
 
   getAllPictures(){
-    return this.http.get<Picture[]>(this.todosUrl).pipe(
+    return this.http.get<Picture[]>(this.photoUrl).pipe(
       map((response) =>
         response),
       catchError(this.handleError)
     );
-  }
+  };
+
+  patchUser(id: number, data: any){
+    return this.http.patch(this.userUrl + id, data);
+  };
 
   private handleError(err: HttpErrorResponse) {
     let errorMessage = '';
@@ -31,5 +36,5 @@ export class UserDetailService {
     }
     console.error(errorMessage);
     return throwError(()=>errorMessage);
-  }
-}
+  };
+};

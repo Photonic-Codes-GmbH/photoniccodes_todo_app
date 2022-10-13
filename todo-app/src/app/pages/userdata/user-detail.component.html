@@ -8,7 +8,7 @@
   <div></div>
 </div>
 
-<form action="" class="usersettings">
+<form (submit)="changes()" class="usersettings">
   <div class="container-body">
     <div class="container-headline">
       <h3>Grundformular</h3>
@@ -20,20 +20,29 @@
           <div class="username">
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Benutzername</mat-label>
-              <input matInput placeholder="{{ userName }}" />
+              <input
+                name="changeUsername"
+                matInput
+                [(ngModel)]="changeUsername"
+                placeholder="{{ loggedInUserName }}"
+              />
             </mat-form-field>
           </div>
           <div class="email">
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>E-Mail</mat-label>
-              <input matInput placeholder="{{ email }}" />
+              <input
+                name="changeEmail"
+                matInput
+                [(ngModel)]="changeEmail"
+                placeholder="{{ loggedInEmail }}" />
             </mat-form-field>
           </div>
         </div>
         <div class="container-value">
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>UserID</mat-label>
-            <input matInput placeholder="{{ userID }}" />
+            <input matInput placeholder="{{ loggenInUserID }}" readonly/>
           </mat-form-field>
         </div>
         <div class="container-buttons">
