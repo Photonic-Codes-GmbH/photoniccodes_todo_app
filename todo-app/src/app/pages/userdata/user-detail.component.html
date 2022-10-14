@@ -24,6 +24,7 @@
                 name="changeUsername"
                 matInput
                 [(ngModel)]="changeUsername"
+                (click)="checkChanges()"
                 placeholder="{{ loggedInUserName }}"
               />
             </mat-form-field>
@@ -35,14 +36,19 @@
                 name="changeEmail"
                 matInput
                 [(ngModel)]="changeEmail"
-                placeholder="{{ loggedInEmail }}" />
+                (click)="checkChanges()"
+                placeholder="{{ loggedInEmail }}"
+              />
             </mat-form-field>
           </div>
         </div>
         <div class="container-value">
           <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>UserID</mat-label>
-            <input matInput placeholder="{{ loggenInUserID }}" readonly/>
+            <input
+              matInput
+              placeholder="UserID {{ loggenInUserID }}"
+              disabled
+            />
           </mat-form-field>
         </div>
         <div class="container-buttons">
@@ -51,6 +57,7 @@
               type="submit"
               value="Speichern"
               class="btn btn-outline-secondary"
+              [disabled]="isDisabled"
             />
           </div>
           <div class="backButton">

@@ -31,34 +31,80 @@ export class UserDetailComponent implements OnInit {
   loggedInEmail = this.loginService.currentUser.email;
   profileImage = ''; //this.pics[0].thumbnailUrl;
 
-  changeUsername = ""; //ngModel
-  changeEmail = ""; //ngModel
+  private _changeUsername = ''; //ngModel
+  // get - set Username
+  public get changeUsername() {
+    return this._changeUsername;
+  }
+  public set changeUsername(value) {
+
+    // Prüfen, ob vorher noch nie etwas eingegeben wurde ("pristine")
+    if(value.length <= 0){
+      console.log('NOTHING')
+      this.isDisabled = true;
+    }
+    else if(value.length >= 0) {
+      this.isDisabled = false;
+    }
+    // Hier soll der Button aktiviert werden
+    this._changeUsername = value;
+  }
+
+  private _changeEmail = ''; //ngModel
+  public get changeEmail() {
+    return this._changeEmail;
+  }
+  public set changeEmail(value) {
+    // Prüfen, ob vorher noch nie etwas eingegeben wurde ("pristine")
+    if(value.length <= 0){
+      console.log('NOTHING')
+      this.isDisabled = true;
+    }
+    else if(value.length >= 0) {
+      this.isDisabled = false;
+    }
+    this._changeEmail = value;
+  }
+  isDisabled = true;
+
+  checkChanges(){
+    this.changeUsername;
+    this.changeEmail;
+  }
 
   changes() {
-    if (this.changeUsername) { //Wenn in der Eingabe der Username geändert wurde
-      if(this.changeEmail) { //Wenn die E-Mail u. Username geändert wurde
-      this.userDetailService.patchUser(this.loginService.currentUser.id, {
-        username: this.changeUsername,
-        email: this.changeEmail
-      });
-      console.log("Username und Email wurden geändert zu: " + this.changeUsername + " und " + this.changeEmail);
-      this.changeUsername = "";
-      this.changeEmail = "";
-      }
-      else { //Nur der Benutzernamen geändert
+    if (this.changeUsername) {
+      //Wenn in der Eingabe der Username geändert wurde
+      if (this.changeEmail) {
+        //Wenn die E-Mail u. Username geändert wurde
+
         this.userDetailService.patchUser(this.loginService.currentUser.id, {
-          username: this.changeUsername
+          username: this.changeUsername,
+          email: this.changeEmail,
         });
-        console.log("Username wurde geändert zu: " + this.changeUsername);
-        this.changeUsername = "";
+        console.log(
+          'Username und Email wurden geändert zu: ' +
+            this.changeUsername +
+            ' und ' +
+            this.changeEmail
+        );
+        this.changeUsername = '';
+        this.changeEmail = '';
+      } else {
+        //Nur der Benutzernamen geändert
+        this.userDetailService.patchUser(this.loginService.currentUser.id, {
+          username: this.changeUsername,
+        });
+        console.log('Username wurde geändert zu: ' + this.changeUsername);
+        this.changeUsername = '';
       }
-    }
-    else{ //Nur die E-Mail geändert
+    } else {
+      //Nur die E-Mail geändert
       this.userDetailService.patchUser(this.loginService.currentUser.id, {
-        email: this.changeEmail
+        email: this.changeEmail,
       });
-      console.log("Email wurde geändert zu: " + this.changeEmail);
-      this.changeEmail = "";
+      console.log('Email wurde geändert zu: ' + this.changeEmail);
+      this.changeEmail = '';
     }
   }
 }
