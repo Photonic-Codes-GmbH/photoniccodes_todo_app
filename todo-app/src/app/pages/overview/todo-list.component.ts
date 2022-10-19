@@ -27,10 +27,22 @@ export class TodoListComponent implements OnInit {
   ) {}
 
   todos: Todo[] = [];
-
   loginUser = this.loginService.currentUser?.name;
+  isDisabled = true;
 
-  inputTodo: string = ''; //ngModel
+  private _inputTodo: string = ''; //ngModel
+  public get inputTodo(): string {
+    return this._inputTodo;
+  }
+  public set inputTodo(value: string) {
+    if(value.length <= 0) {
+      this.isDisabled = true;
+    } else if (value.length >= 1) {
+      this.isDisabled = false;
+    this._inputTodo = value;
+  }
+}
+
   isEdit: boolean = true; // diable/enable "readonly" property
   isChanged: boolean = false; //
 

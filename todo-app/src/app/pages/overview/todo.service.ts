@@ -42,7 +42,6 @@ export class TodoService {
       errorMessage =
           `Server returned code: ${err.status}, error message is: ${err.message}`;
     }
-    console.error(errorMessage);
     return throwError(() => errorMessage);
   }
 }
