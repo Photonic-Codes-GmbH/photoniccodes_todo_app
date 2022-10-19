@@ -1,2 +1,23 @@
+<nav [hidden]="getLoginRoute()">
+  <div class="container-header">
+    <div class="container-logo">
+      <img class="logo" src="./assets/images/Logo.png" routerLink="/overview" />
+    </div>
+    <div class="LoggedIn-user">
+      <h1 [hidden]="visibleOnOverviewRoute()">{{ getCurrentUser() }}'s ToDo Liste</h1>
+      <h1 [hidden]="visibleOnUserdataRoute()"><b>Benutzerdaten</b></h1>
+    </div>
+    <div>
+      <div calss="user-information" [hidden]="visibleOnOverviewRoute()">
+        <!--<a [routerLink]="[]"> Benutzerdaten</a>-->
+        <mat-icon
+          class="profil"
+          fontIcon="account_circle"
+          routerLink="/userdata"
+        ></mat-icon>
+        <!--ToDo: LogIn User setzten-->
+      </div>
+    </div>
+  </div>
+</nav>
 <router-outlet></router-outlet>
-
