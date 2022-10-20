@@ -8,7 +8,7 @@
       <h1 [hidden]="visibleOnUserdataRoute()"><b>Benutzerdaten</b></h1>
     </div>
     <div>
-      <div calss="user-information" >
+      <div calss="user-information" [style]="{'visibility':getHidden()}">
         <!--<a [routerLink]="[]"> Benutzerdaten</a>-->
         <mat-icon
           class="profil"

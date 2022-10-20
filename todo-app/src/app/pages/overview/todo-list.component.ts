@@ -10,9 +10,10 @@ import { Router } from '@angular/router';
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss'],
 })
-export class TodoListComponent implements OnInit {
-  ngOnInit(): void {
-
+export class TodoListComponent implements OnInit
+{
+  ngOnInit(): void
+  {
     if(!this.loginService.currentUser) this.router.navigate(['/login' ])
 
     this.todoService
@@ -31,56 +32,73 @@ export class TodoListComponent implements OnInit {
   isDisabled = true;
 
   private _inputTodo: string = ''; //ngModel
-  public get inputTodo(): string {
+  public get inputTodo(): string
+  {
     return this._inputTodo;
   }
-  public set inputTodo(value: string) {
-    if(value.length <= 0) {
+
+  public set inputTodo(value: string)
+  {
+    if(value.length <= 0)
+    {
       this.isDisabled = true;
-    } else if (value.length >= 1) {
+    }
+    else if (value.length >= 1)
+    {
       this.isDisabled = false;
     this._inputTodo = value;
+    }
   }
-}
 
   isEdit: boolean = true; // diable/enable "readonly" property
   isChanged: boolean = false; //
 
-  edit(todoId: number) {
-    if (this.isEdit == true) {
+  edit(todoId: number)
+  {
+    if (this.isEdit == true)
+    {
       this.isEdit = false;
-    } else {
+    }
+    else
+    {
       this.isEdit = true;
       this.isChanged = true;
       this.changes(todoId);
     }
   }
 
-  changes(todoId: number) {
-    if (this.isChanged == true) {
+  changes(todoId: number)
+  {
+    if (this.isChanged == true)
+    {
       //changes via edit
       this.todoService.patchTodo(todoId, {
         title: this.todos.filter((todo) => todo.id === todoId)[0].title,
       });
       this.isChanged = false;
-    } else if (this.isChanged == false) {
+    }
+    else if (this.isChanged == false)
+    {
       // changes via checkbox
-      if (
-        this.todos.filter((todo) => todo.id === todoId)[0].completed == true
-      ) {
+      if (this.todos.filter((todo) => todo.id === todoId)[0].completed == true)
+      {
         this.todoService.patchTodo(todoId, { completed: false });
-      } else {
+      }
+      else
+      {
         this.todoService.patchTodo(todoId, { completed: true });
       }
     }
   }
 
-  delete(todoId: number) {
+  delete(todoId: number)
+  {
     this.todoService.deleteTodo(todoId);
     this.todos = this.todos.filter((todo) => todo.id !== todoId);
   }
 
-  addTodo() {
+  addTodo()
+  {
     this.todos.push({
       userId: this.loginService.currentUser.id,
       id: this.todos.length + 1,
@@ -91,7 +109,8 @@ export class TodoListComponent implements OnInit {
     this.inputTodo = '';
   }
 
-  post(todoId: number) {
+  post(todoId: number)
+  {
     this.todoService.postTodo(todoId, {
       userId: this.loginService.currentUser.id,
       id: todoId,
@@ -100,7 +119,8 @@ export class TodoListComponent implements OnInit {
     });
   }
 
-  trackByIdx(index: number, obj: any): any {
+  trackByIdx(index: number, obj: any): any
+  {
     return index;
   }
 }

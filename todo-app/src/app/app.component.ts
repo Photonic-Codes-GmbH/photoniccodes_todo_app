@@ -10,15 +10,15 @@ import { LoginService } from './pages/login/login.service';
 
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit{
+export class AppComponent {
   constructor(private loginService: LoginService, private router: Router) {}
 
-  ngOnInit() {}
-
+  // Get the loggedin user from the login.service.ts
   getCurrentUser() {
     return this.loginService.currentUser?.name;
   }
 
+  // Get the different routes to show/hide navbar content
   getLoginRoute() {
     return this.router.url === '/login';
   }
@@ -31,6 +31,7 @@ export class AppComponent implements OnInit{
     return this.router.url === '/userdata';
   }
 
+  // Hide the profile button on /userdata
   getHidden(){
     return (this.router.url === '/userdata') ? "hidden" : "visible"
   }

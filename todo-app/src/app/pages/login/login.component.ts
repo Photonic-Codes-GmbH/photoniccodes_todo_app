@@ -38,29 +38,31 @@ export class LoginComponent implements OnInit {
     user => doSomething = doThis
     */
 
+
     let foundUser = this.users.find(({ username, email }) => this.username == username && this.email == email);
     let foundUserEmail = this.users.find(({email})=> this.email == email);
 
-    if(foundUserEmail){
-
-        if(foundUser){
-
+    // Checks if the username is present based on the email
+    if(foundUserEmail)
+    {
+        if(foundUser)
+        {
           this.loginService.currentUser = foundUser;
           this.router.navigate(['/overview']);
 
-        }
-        else{
+        } // end if(foundUser)
+        else
+        {
           alert("Benutzername falsch")
           this.username = "";
+        } // end else(foundUser)
 
-        }
-
-    }
-    else{
+    } // end if(foundUserEmail)
+    else
+    {
       alert("Anmeldedaten falsch");
       this.username = "";
       this.email = "";
-    }
-
+    } // end else (foundUserEmail)
   }
 }

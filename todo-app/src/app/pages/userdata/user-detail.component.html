@@ -7,11 +7,12 @@
         </div>
         <div class="container-input">
           <div class="username">
-            <mat-form-field class="example-full-width" appearance="fill">
+            <mat-form-field class="example-full-width">
               <mat-label>Benutzername</mat-label>
               <input
-                name="changeUsername"
                 matInput
+                type="text"
+                name="changeUsername"
                 [(ngModel)]="changeUsername"
                 (click)="checkChanges()"
                 placeholder="{{ loggedInUserName }}"
@@ -19,9 +20,10 @@
             </mat-form-field>
           </div>
           <div class="email">
-            <mat-form-field class="example-full-width" appearance="fill">
+            <mat-form-field class="example-full-width">
               <mat-label>E-Mail</mat-label>
               <input
+                type="text"
                 name="changeEmail"
                 matInput
                 [(ngModel)]="changeEmail"
@@ -32,7 +34,7 @@
           </div>
         </div>
         <div class="container-value">
-          <mat-form-field class="example-full-width" appearance="fill">
+          <mat-form-field class="example-full-width">
             <input
               matInput
               placeholder="UserID {{ loggenInUserID }}"

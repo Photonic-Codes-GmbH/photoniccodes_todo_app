@@ -30,7 +30,7 @@ export class UserDetailComponent implements OnInit {
   loggedInUserName = this.loginService.currentUser?.username;
   loggedInEmail = this.loginService.currentUser?.email;
   profileImage = ''; //this.pics[0].thumbnailUrl;
-  isDisabled = true;
+  isDisabled = true; // disable/anable the save button
 
   // Getter and setter changeUsername
   private _changeUsername = ''; //ngModel
@@ -39,7 +39,7 @@ export class UserDetailComponent implements OnInit {
     return this._changeUsername;
   }
   public set changeUsername(value) {
-    // Prüfen, ob vorher noch nie etwas eingegeben wurde ("pristine")
+    // Check if nothing has been entered before ("pristine")
     if (value.length <= 0) {
       this.isDisabled = true;
     } else if (value.length >= 0) {
@@ -54,7 +54,7 @@ export class UserDetailComponent implements OnInit {
     return this._changeEmail;
   }
   public set changeEmail(value) {
-    // Prüfen, ob vorher noch nie etwas eingegeben wurde ("pristine")
+    // Check if nothing has been entered before ("pristine")
     if (value.length <= 0) {
       this.isDisabled = true;
     } else if (value.length >= 1) {
@@ -63,7 +63,8 @@ export class UserDetailComponent implements OnInit {
     this._changeEmail = value;
   }
 
-  checkChanges() { // Disable the "Save" button if no changes are made
+  // Disable the "Save" button if no changes are made
+  checkChanges() {
     this.changeUsername;
     this.changeEmail;
   }
@@ -78,6 +79,7 @@ export class UserDetailComponent implements OnInit {
           username: this.changeUsername,
           email: this.changeEmail,
         });
+        // Space for snackbar/alert
         console.log(
           'Username und Email wurden geändert zu: ' +
             this.changeUsername +
@@ -87,18 +89,20 @@ export class UserDetailComponent implements OnInit {
         this.changeUsername = '';
         this.changeEmail = '';
       } else {
-        //Nur der Benutzernamen geändert
+        // If only the username get changed
         this.userDetailService.patchUser(this.loginService.currentUser.id, {
           username: this.changeUsername,
         });
+        // TODO: Space for snackbar/alert
         console.log('Username wurde geändert zu: ' + this.changeUsername);
         this.changeUsername = '';
       }
     } else {
-      //Nur die E-Mail geändert
+      // If only the email get changed
       this.userDetailService.patchUser(this.loginService.currentUser.id, {
         email: this.changeEmail,
       });
+      // TODO: Space for snackbar/alert
       console.log('Email wurde geändert zu: ' + this.changeEmail);
       this.changeEmail = '';
     }
