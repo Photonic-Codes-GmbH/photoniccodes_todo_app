@@ -15,24 +15,23 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {}
 
-  currentRoute = '';
-
   getCurrentUser() {
     return this.loginService.currentUser?.name;
   }
 
   getLoginRoute() {
-    this.currentRoute = this.router.url;
-    return this.currentRoute === '/login';
+    return this.router.url === '/login';
   }
 
   visibleOnUserdataRoute() {
-    this.currentRoute = this.router.url;
-    return this.currentRoute === '/overview';
+    return this.router.url === '/overview';
   }
 
   visibleOnOverviewRoute() {
-    this.currentRoute = this.router.url;
-    return this.currentRoute === '/userdata';
+    return this.router.url === '/userdata';
+  }
+
+  getHidden(){
+    return (this.router.url === '/userdata') ? "hidden" : "visible"
   }
 }
