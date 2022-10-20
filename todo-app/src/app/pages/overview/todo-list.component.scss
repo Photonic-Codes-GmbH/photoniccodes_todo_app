@@ -4,6 +4,12 @@
   align-items: center;
 }
 
+.container-table {
+  height: 65vh;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
 mat-icon {
   cursor: pointer;
 }
@@ -14,7 +20,6 @@ mat-icon {
   justify-content: space-between;
 
   width: 800px;
-  height: 800px;
   margin-left: 10px;
   margin-right: 10px;
   padding-left: 10px;
