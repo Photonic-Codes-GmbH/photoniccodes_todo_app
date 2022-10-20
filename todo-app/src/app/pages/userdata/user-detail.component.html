@@ -52,20 +52,20 @@
         </div>
         <div class="container-buttons">
           <div class="saveButton">
-            <input
+            <button mat-raised-button color="primary"
               type="submit"
-              value="Speichern"
               class="btn btn-outline-secondary"
               [disabled]="isDisabled"
-            />
+              >Speichern
+            </button>
           </div>
           <div class="backButton">
-            <input
-              type="submit"
+            <button mat-raised-button color="primary"
+              type="button"
               routerLink="/overview"
-              value="Zurück"
               class="btn btn-outline-secondary"
-            />
+              >Zurück
+            </button>
           </div>
         </div>
       </div>
