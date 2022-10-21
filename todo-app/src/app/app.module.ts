@@ -10,6 +10,7 @@ import { UserDetailComponent } from './pages/userdata/user-detail.component';
 import { MaterialModule } from 'material-module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
+import { HeadingComponent } from './pages/userdata/heading/heading.component';
 
 
 
@@ -19,7 +20,8 @@ import { MatInputModule } from '@angular/material/input';
     AppComponent,
     TodoListComponent,
     LoginComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    HeadingComponent
   ],
   imports:
   [

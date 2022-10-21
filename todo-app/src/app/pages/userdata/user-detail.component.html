@@ -3,7 +3,10 @@
     <div class="container-help1">
       <div class="userStuff">
         <div class="container-headline">
-          <h1>Grundformular</h1>
+          <heading
+          [value]="'Anderes Formular'"
+          (notify)="onNotify($event)"
+          ></heading>
         </div>
         <div class="container-input">
           <div class="username">
@@ -13,8 +16,8 @@
                 matInput
                 type="text"
                 name="changeUsername"
-                [(ngModel)]="changeUsername"
-                (click)="checkChanges()"
+                [value]="changeUsername"
+                (input)="checkDisabled()"
                 placeholder="{{ loggedInUserName }}"
               />
             </mat-form-field>
@@ -26,8 +29,8 @@
                 type="text"
                 name="changeEmail"
                 matInput
-                [(ngModel)]="changeEmail"
-                (click)="checkChanges()"
+                [value]="changeEmail"
+                (input)="checkDisabled()"
                 placeholder="{{ loggedInEmail }}"
               />
             </mat-form-field>
