@@ -29,29 +29,31 @@ export class TodoListComponent implements OnInit
 
   todos: Todo[] = [];
   loginUser = this.loginService.currentUser?.name;
-  isDisabled = true;
-
-  private _inputTodo: string = ''; //ngModel
-  public get inputTodo(): string
-  {
-    return this._inputTodo;
-  }
-
-  public set inputTodo(value: string)
-  {
-    if(value.length <= 0)
-    {
-      this.isDisabled = true;
-    }
-    else if (value.length >= 1)
-    {
-      this.isDisabled = false;
-    this._inputTodo = value;
-    }
-  }
-
+  isDisabled = true; //
   isEdit: boolean = true; // diable/enable "readonly" property
-  isChanged: boolean = false; //
+  isChanged: boolean = false; // Change between readonly and editable todo´s
+
+  // Getter and setter to manipulate the inputfield
+  inputTodo: string = ''; //ngModel
+  // public get inputTodo(): string
+  // {
+  //   return this._inputTodo;
+  // }
+
+  // public set inputTodo(value: string)
+  // {
+  //   if(value.length <= 0)
+  //   {
+  //     this.isDisabled = true;
+  //   }
+  //   else if (value.length >= 1)
+  //   {
+  //     this.isDisabled = false;
+  //   this._inputTodo = value;
+  //   }
+  // }
+
+  isButtonDisabled = 0
 
   edit(todoId: number)
   {

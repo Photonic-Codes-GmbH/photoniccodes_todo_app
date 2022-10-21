@@ -46,6 +46,9 @@
                 <input
                   matInput
                   type="text"
+                  id="inputValue"
+                  #inputValue
+                  (input)="isButtonDisabled = inputValue.value.length"
                   name="inputTodo"
                   class="todo-input"
                   placeholder="ToDo Name"
@@ -56,7 +59,7 @@
             <div>
               <button
                 mat-raised-button color="primary"
-                [disabled]="isDisabled"
+                disabled="{{isButtonDisabled == 0}}"
                 type="submit"
                 class="btn btn-outline-secondary"
                 >Anlegen
