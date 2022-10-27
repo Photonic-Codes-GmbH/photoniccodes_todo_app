@@ -11,6 +11,7 @@ import { MaterialModule } from 'material-module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { HeadingComponent } from './pages/userdata/heading/heading.component';
+import { TodosComponent } from './todos/todos.component';
 
 
 
@@ -21,7 +22,9 @@ import { HeadingComponent } from './pages/userdata/heading/heading.component';
     TodoListComponent,
     LoginComponent,
     UserDetailComponent,
-    HeadingComponent
+    HeadingComponent,
+    TodosComponent
+
   ],
   imports:
   [

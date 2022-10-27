@@ -1,118 +1,55 @@
 import { LoginService } from './../login/login.service';
-import { Component, OnInit } from '@angular/core';
-import { Todo } from '../interfaces/todo';
+import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { TodoService } from './todo.service';
 import { __importDefault } from 'tslib';
 import { Router } from '@angular/router';
-
+import { TodosComponent } from 'src/app/todos/todos.component';
 
 @Component({
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss'],
 })
-export class TodoListComponent implements OnInit
-{
-  ngOnInit(): void
-  {
-    if(!this.loginService.currentUser) this.router.navigate(['/login' ])
+export class TodoListComponent implements OnInit, OnDestroy, OnChanges {
+  loginUser = this.loginService.currentUser?.name;
+  isDisabled: boolean = true; //
+  inputTodo: string = ''; //ngModel
+  isButtonDisabled = 0;
+  isShow: boolean = true;
+  isDeleted: boolean = false;
 
-    this.todoService
-      .getAllTodos()
-      .subscribe((incommingTodos: Todo[]) => (this.todos = incommingTodos));
+  ngOnInit(): void {
+    if (!this.loginService.currentUser) this.router.navigate(['/login']);
+    console.log('OnInit_todo-list.component');
+  }
+
+  ngOnDestroy() {
+    console.log('OnDestroy_todo-list.component');
+  }
+
+  ngOnChanges() {
+    console.log('Changed');
   }
 
   constructor(
     private todoService: TodoService,
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private todoComponent: TodosComponent
   ) {}
 
-  todos: Todo[] = [];
-  loginUser = this.loginService.currentUser?.name;
-  isDisabled = true; //
-  isEdit: boolean = true; // diable/enable "readonly" property
-  isChanged: boolean = false; // Change between readonly and editable todo´s
-
-  // Getter and setter to manipulate the inputfield
-  inputTodo: string = ''; //ngModel
-  // public get inputTodo(): string
-  // {
-  //   return this._inputTodo;
-  // }
-
-  // public set inputTodo(value: string)
-  // {
-  //   if(value.length <= 0)
-  //   {
-  //     this.isDisabled = true;
-  //   }
-  //   else if (value.length >= 1)
-  //   {
-  //     this.isDisabled = false;
-  //   this._inputTodo = value;
-  //   }
-  // }
-
-  isButtonDisabled = 0
-
-  edit(todoId: number)
-  {
-    if (this.isEdit == true)
-    {
-      this.isEdit = false;
-    }
-    else
-    {
-      this.isEdit = true;
-      this.isChanged = true;
-      this.changes(todoId);
-    }
-  }
-
-  changes(todoId: number)
-  {
-    if (this.isChanged == true)
-    {
-      //changes via edit
-      this.todoService.patchTodo(todoId, {
-        title: this.todos.filter((todo) => todo.id === todoId)[0].title,
-      });
-      this.isChanged = false;
-    }
-    else if (this.isChanged == false)
-    {
-      // changes via checkbox
-      if (this.todos.filter((todo) => todo.id === todoId)[0].completed == true)
-      {
-        this.todoService.patchTodo(todoId, { completed: false });
-      }
-      else
-      {
-        this.todoService.patchTodo(todoId, { completed: true });
-      }
-    }
-  }
-
-  delete(todoId: number)
-  {
-    this.todoService.deleteTodo(todoId);
-    this.todos = this.todos.filter((todo) => todo.id !== todoId);
-  }
-
-  addTodo()
-  {
-    this.todos.push({
+  addTodo() {
+    this.todoComponent.todos.push({
       userId: this.loginService.currentUser.id,
-      id: this.todos.length + 1,
+      id: this.todoComponent.todos.length + 1,
       title: this.inputTodo,
       completed: false,
     });
-    this.post(this.todos.length);
+    this.post(this.todoComponent.todos.length);
     this.inputTodo = '';
+    this.isButtonDisabled = 0;
   }
 
-  post(todoId: number)
-  {
+  post(todoId: number) {
     this.todoService.postTodo(todoId, {
       userId: this.loginService.currentUser.id,
       id: todoId,
@@ -121,8 +58,17 @@ export class TodoListComponent implements OnInit
     });
   }
 
-  trackByIdx(index: number, obj: any): any
-  {
-    return index;
+  clear() {
+    this.todoComponent.todos = [];
+  }
+
+  destroyOnClick() {
+    this.isShow = false;
+    this.isDeleted = true;
+  }
+
+  restore(){
+    this.isShow = true;
+    this.isDeleted = false;
   }
 }

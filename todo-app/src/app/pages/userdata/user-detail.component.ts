@@ -9,7 +9,6 @@ import { UserDetailService } from './user-detail.service';
   styleUrls: ['./user-detail.component.scss'],
 })
 export class UserDetailComponent implements OnInit {
-
   constructor(
     private userDetailService: UserDetailService,
     private loginService: LoginService
@@ -23,12 +22,13 @@ export class UserDetailComponent implements OnInit {
         this.profileImage = this.pics[0].thumbnailUrl;
       });
 
-    this.changeUsernameElement = document.getElementsByName("changeUsername")[0]
-    this.changeEmailElement = document.getElementsByName("changeEmail")[0]
+    this.changeUsernameElement =
+      document.getElementsByName('changeUsername')[0];
+    this.changeEmailElement = document.getElementsByName('changeEmail')[0];
   }
 
-  changeUsernameElement: HTMLElement | undefined
-  changeEmailElement: HTMLElement | undefined
+  changeUsernameElement: HTMLElement | undefined;
+  changeEmailElement: HTMLElement | undefined;
   pics: Picture[] = [];
   // Variables
   loginUser = this.loginService.currentUser?.name;
@@ -38,24 +38,23 @@ export class UserDetailComponent implements OnInit {
   profileImage = ''; //this.pics[0].thumbnailUrl;
   isDisabled = true; // disable/anable the save button
 
+  //FIXME: Nested Component
   onNotify(message: string) {
-
-    console.log(message)
+    console.log(message);
   }
 
-  checkDisabled(){
-
+  checkDisabled() {
     let userName = (this.changeUsernameElement as HTMLInputElement).value;
     let email = (this.changeEmailElement as HTMLInputElement).value;
+    let combination = userName + email;
 
-    let combination = userName + email
-
-    combination.length == 0 ? this.isDisabled = true : this.isDisabled = false;
+    combination.length == 0
+      ? (this.isDisabled = true)
+      : (this.isDisabled = false);
   }
 
   changeUsername = '';
   changeEmail = '';
-
 
   changes() {
     if (this.changeUsername) {
@@ -81,7 +80,7 @@ export class UserDetailComponent implements OnInit {
         this.userDetailService.patchUser(this.loginService.currentUser.id, {
           username: this.changeUsername,
         });
-        // TODO: Space for snackbar/alert
+        // TODO: Space for a snackbar/alert
         console.log('Username wurde geändert zu: ' + this.changeUsername);
         this.changeUsername = '';
       }
@@ -90,7 +89,7 @@ export class UserDetailComponent implements OnInit {
       this.userDetailService.patchUser(this.loginService.currentUser.id, {
         email: this.changeEmail,
       });
-      // TODO: Space for snackbar/alert
+      // TODO: Space for a snackbar/alert
       console.log('Email wurde geändert zu: ' + this.changeEmail);
       this.changeEmail = '';
     }

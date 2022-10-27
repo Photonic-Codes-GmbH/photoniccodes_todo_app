@@ -25,11 +25,6 @@ mat-icon {
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 20px;
-
-  .edited {
-    width: 100%;
-    border: none;
-  }
 }
 
 .container-newEntries {
@@ -43,5 +38,12 @@ mat-icon {
   padding-top: 20px;
   display: flex;
   justify-content: space-between;
+  width: 800px;
+}
+
+.buttons{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
   width: 500px;
 }

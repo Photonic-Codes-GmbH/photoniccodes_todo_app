@@ -1,38 +1,7 @@
 <div class="container-overview">
   <div class="container-body">
     <div class="container-table">
-      <table class="table" *ngIf="todos.length">
-        <tbody>
-          <tr *ngFor="let todo of todos; let i = index; trackBy: trackByIdx">
-            <td class="status">
-              <span>
-                <input
-                  type="checkbox"
-                  (click)="changes(todo.id)"
-                  [checked]="todo.completed"
-                  (change)="todo.completed = !todo.completed"
-                />
-              </span>
-            </td>
-            <td class="description" style="width: 100%">
-              <input
-                class="edited"
-                type="text"
-                [readonly]="isEdit"
-                [(ngModel)]="todos[i].title"
-              />
-            </td>
-            <td class="edit">
-              <div>
-                <mat-icon fontIcon="edit" (click)="edit(todo.id)"></mat-icon>
-              </div>
-            </td>
-            <td class="delete">
-              <mat-icon fontIcon="delete" (click)="delete(todo.id)"></mat-icon>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <all-todos *ngIf="isShow" [isCleard]="isDeleted"></all-todos>
     </div>
     <!-- end of container-table -->
 
@@ -56,13 +25,26 @@
                 />
               </mat-form-field>
             </div>
-            <div>
+            <div class="buttons">
               <button
                 mat-raised-button color="primary"
                 disabled="{{isButtonDisabled == 0}}"
                 type="submit"
-                class="btn btn-outline-secondary"
-                >Anlegen
+                >ToDo anlegen
+              </button>
+              <button
+                mat-raised-button color="primary"
+                type="button"
+                class="destroy"
+                (click)="destroyOnClick()"
+                >Alle löschen
+              </button>
+              <button
+                mat-raised-button color="primary"
+                type="button"
+                class="destroy"
+                (click)="restore()"
+                >Wiederherstellen
               </button>
             </div>
           </div>
